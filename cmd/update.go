@@ -4,7 +4,10 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"strconv"
+
 	"github.com/spf13/cobra"
+	"todoApp/internal/update"
 )
 
 // updateCmd represents the update command
@@ -30,5 +33,7 @@ func init() {
 }
 
 func updateTodoCmd(cmd *cobra.Command, args []string) {
-
+	id, _ := strconv.Atoi(args[0])
+	task := args[1]
+	update.UpdateTodoById(id, task)
 }
