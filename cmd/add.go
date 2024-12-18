@@ -19,7 +19,7 @@ var addCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(addCmd)
-	addCmd.Flags().StringP("task", "t", "", "todo task")
+	// addCmd.Flags().StringP("task", "t", "", "todo task")
 
 	// Here you will define your flags and configuration settings.
 
@@ -33,10 +33,7 @@ func init() {
 }
 
 func addTodoCmd(cmd *cobra.Command, args []string) {
-	task, err := cmd.Flags().GetString("task")
-	if err != nil {
-		panic(err)
-	}
+	task := args[0]
 
 	add.AddTodo(task)
 }

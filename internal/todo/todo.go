@@ -16,6 +16,12 @@ func New(id int, task string, done bool) Todo {
 	}
 }
 
+func PrintTodos(todos []Todo) {
+	for _, t := range todos {
+		t.Print()
+	}
+}
+
 func (t Todo) Print() {
 	fmt.Printf("ID: %v\n", t.Id)
 	fmt.Printf("task: %v\n", t.Task)

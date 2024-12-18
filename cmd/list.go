@@ -13,19 +13,14 @@ import (
 var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "list of all todo's",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		get.GetTodos()
-	},
+	Long:  `list tasks`,
+	Run:   listTodoCmd,
 }
 
 func init() {
 	rootCmd.AddCommand(listCmd)
+	listCmd.Flags().IntP("id", "i", 0, "get task by id")
+	listCmd.Flags().BoolP("all", "a", false, "list all tasks")
 
 	// Here you will define your flags and configuration settings.
 
@@ -36,4 +31,28 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// listCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+}
+
+func listTodoCmd(cmd *cobra.Command, args []string) {
+	id, err := cmd.Flags().GetInt("id")
+	if err != nil {
+		panic(err)
+	}
+
+	listAll, err := cmd.Flags().GetBool("all")
+	if err != nil {
+		panic(err)
+	}
+
+	if listAll {
+		todos := get.GetTodos()
+		for _, t := range todos {
+			t.Print()
+		}
+	}
+
+	if id != 0 {
+		todo := get.GetTodoById(id)
+		todo.Print()
+	}
 }

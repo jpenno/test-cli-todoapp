@@ -1,15 +1,16 @@
 package get
 
 import (
-	"fmt"
-	"todoApp/internal/fileIO"
+	fileio "todoApp/internal/fileIO"
+	"todoApp/internal/todo"
 )
 
-func GetTodos() {
+func GetTodos() []todo.Todo {
 	todos := fileio.GetTodos("./assets/data.json")
+	return todos
+}
 
-	for _, t := range todos {
-		t.Print()
-		fmt.Println()
-	}
+func GetTodoById(id int) todo.Todo {
+	todos := GetTodos()
+	return todos[id-1]
 }
