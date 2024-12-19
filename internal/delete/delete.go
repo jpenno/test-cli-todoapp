@@ -2,6 +2,7 @@ package delete
 
 import (
 	"fmt"
+	"os"
 	fileio "todoApp/internal/fileIO"
 	"todoApp/internal/get"
 	"todoApp/internal/todo"
@@ -15,7 +16,7 @@ func DeleteById(id int) {
 	todos := get.GetTodos()
 
 	fmt.Println("Deleting")
-	todos[id-1].Print()
+	todos[id-1].Print(os.Stdout)
 
 	todos = remove(todos, id-1)
 	for i := range todos {

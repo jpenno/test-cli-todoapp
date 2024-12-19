@@ -5,6 +5,7 @@ package cmd
 
 import (
 	"todoApp/internal/get"
+	"todoApp/internal/todo"
 
 	"github.com/spf13/cobra"
 )
@@ -36,7 +37,8 @@ func init() {
 func listTodoCmd(cmd *cobra.Command, args []string) {
 	todos := get.GetTodos()
 
-	for _, t := range todos {
-		t.Print()
-	}
+	todo.PrintTodos(todos)
+	// for _, t := range todos {
+	// 	t.Print()
+	// }
 }
