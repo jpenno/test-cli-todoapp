@@ -19,8 +19,8 @@ var listCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(listCmd)
-	listCmd.Flags().IntP("id", "i", 0, "get task by id")
-	listCmd.Flags().BoolP("all", "a", false, "list all tasks")
+	// listCmd.Flags().IntP("id", "i", 0, "get task by id")
+	// listCmd.Flags().BoolP("all", "a", false, "list all tasks")
 
 	// Here you will define your flags and configuration settings.
 
@@ -34,25 +34,9 @@ func init() {
 }
 
 func listTodoCmd(cmd *cobra.Command, args []string) {
-	id, err := cmd.Flags().GetInt("id")
-	if err != nil {
-		panic(err)
-	}
+	todos := get.GetTodos()
 
-	listAll, err := cmd.Flags().GetBool("all")
-	if err != nil {
-		panic(err)
-	}
-
-	if listAll {
-		todos := get.GetTodos()
-		for _, t := range todos {
-			t.Print()
-		}
-	}
-
-	if id != 0 {
-		todo := get.GetTodoById(id)
-		todo.Print()
+	for _, t := range todos {
+		t.Print()
 	}
 }
